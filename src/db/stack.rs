@@ -1,4 +1,4 @@
-/*
+/* Way 1 : implement Stack with Vec
 pub struct Stack<T> {
     items: Vec<T>,
 }
@@ -30,6 +30,7 @@ impl<T> Stack<T> {
 }
 */
 
+/* Way 2: implement Stack with malloc
 use std::alloc::{alloc, dealloc, realloc, Layout};
 use std::mem::MaybeUninit;
 use std::ptr::{self, NonNull};
@@ -106,7 +107,7 @@ impl<T> Stack<T> {
             return None;
         }
 
-        unsafe { Some((&*self.top.offset(-1)).assume_init_ref()) }
+        unsafe { Some(&(*self.top.offset(-1)).assume_init_ref()) }
     }
 
     pub fn traverse<F: FnMut(&T)>(&self, mut visit: F) {
@@ -150,5 +151,65 @@ impl<T> Drop for Stack<T> {
         unsafe {
             dealloc(self.base.as_ptr() as *mut u8, self.layout());
         }
+    }
+}
+*/
+
+/* Way 3: implement stack with linkedlist */
+use std::collections::LinkedList;
+
+pub struct Stack<T> {
+    list: LinkedList<T>,
+    len: usize,
+}
+
+impl<T> Stack<T> {
+    pub fn new() -> Self {
+        Self {
+            list: LinkedList::new(),
+            len: 0,
+        }
+    }
+
+    pub fn len(&self) -> usize {
+        self.len
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.len == 0
+    }
+
+    pub fn clear(&mut self) {
+        self.list.clear();
+        self.len = 0;
+    }
+
+    pub fn push(&mut self, val: T) {
+        self.list.push_front(val);
+        self.len += 1;
+    }
+
+    pub fn pop(&mut self) -> Option<T> {
+        let result = self.list.pop_front();
+        if result.is_some() {
+            self.len -= 1;
+        }
+        result
+    }
+
+    pub fn top(&self) -> Option<&T> {
+        self.list.front()
+    }
+
+    pub fn traverse<F: FnMut(&T)>(&self, mut visit: F) {
+        for item in &self.list {
+            visit(item);
+        }
+    }
+}
+
+impl<T> Drop for Stack<T> {
+    fn drop(&mut self) {
+        self.clear();
     }
 }
