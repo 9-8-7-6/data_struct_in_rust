@@ -1,18 +1,18 @@
 #[derive(Debug)]
-pub struct Queue<T> {
+pub struct Deque<T> {
     len: usize,
     data: Vec<T>,
 }
 
-impl<T> Queue<T> {
+impl<T> Deque<T> {
     pub fn new(size: usize) -> Self {
-        Queue {
+        Deque {
             len: size,
             data: Vec::with_capacity(size),
         }
     }
 
-    pub fn enqueue(&mut self, item: T) -> Result<(), String> {
+    pub fn push_front(&mut self, item: T) -> Result<(), String> {
         if Self::size(&self) == self.len {
             return Err("No space available".to_string());
         }
@@ -21,7 +21,24 @@ impl<T> Queue<T> {
         Ok(())
     }
 
-    pub fn dequeue(&mut self) -> Option<T> {
+    pub fn push_back(&mut self, item: T) -> Result<(), String> {
+        if Self::size(&self) == self.len {
+            return Err("No space available".to_string());
+        }
+        self.data.push(item);
+
+        Ok(())
+    }
+
+    pub fn pop_front(&mut self) -> Option<T> {
+        if Self::size(&self) > 0 {
+            Some(self.data.remove(0))
+        } else {
+            None
+        }
+    }
+
+    pub fn pop_back(&mut self) -> Option<T> {
         if Self::size(&self) > 0 {
             self.data.pop()
         } else {
