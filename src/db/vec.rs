@@ -92,7 +92,11 @@ impl<T: Copy + Debug> LVec<T> {
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        self.remove(self.size - 1)
+        if self.is_empty() {
+            None
+        } else {
+            self.remove(self.size - 1)
+        }
     }
 
     pub fn remove(&mut self, index: usize) -> Option<T> {
