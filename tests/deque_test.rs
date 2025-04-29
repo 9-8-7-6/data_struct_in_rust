@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use data_struct_in_rust::db::deque::Deque;
+    use data_struct_in_rust::data_structure::deque::Deque;
     #[test]
     fn test_push_front_back_and_pop() {
         let mut deque = Deque::new(3);

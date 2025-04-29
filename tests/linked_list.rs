@@ -1,4 +1,4 @@
-use data_struct_in_rust::db::linked_list::List;
+use data_struct_in_rust::data_structure::linked_list::List;
 
 #[cfg(test)]
 mod tests {

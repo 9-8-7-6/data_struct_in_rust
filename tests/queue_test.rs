@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use data_struct_in_rust::db::queue::Queue;
+    use data_struct_in_rust::data_structure::queue::Queue;
 
     #[test]
     fn test_enqueue_dequeue() {

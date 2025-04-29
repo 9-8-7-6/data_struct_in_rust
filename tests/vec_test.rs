@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use data_struct_in_rust::db::vec::LVec;
+    use data_struct_in_rust::data_structure::vec::LVec;
 
     #[test]
     fn test_new_lvec() {

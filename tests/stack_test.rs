@@ -1,4 +1,4 @@
-use data_struct_in_rust::db::stack::Stack;
+use data_struct_in_rust::data_structure::stack::Stack;
 
 #[test]
 fn test_stack_peek() {

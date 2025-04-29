@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod tests {
-    use data_struct_in_rust::db::hashmap::Hashmap;
+    use data_struct_in_rust::data_structure::hashmap::Hashmap;
     #[test]
     fn test_insert_and_get() {
         let mut map = Hashmap::<i32>::new(11);
