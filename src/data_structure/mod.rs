@@ -1,3 +1,4 @@
+pub mod binary_tree;
 pub mod deque;
 pub mod hashmap;
 pub mod linked_list;
